@@ -26,6 +26,15 @@ spring:
     resources:
       static-locations: classpath:static/,file:static/
 
+# 日志配置
+logging:
+  level:
+    com.cl.service.impl.NotificationServiceImpl: INFO
+    com.cl.config.ScheduledConfig: INFO
+    com.cl.controller.YishengyuyueController: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} - %msg%n"
+
 #mybatis
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml

@@ -100,8 +100,35 @@ public class JiuzhentongzhiEntity<T> implements Serializable {
 	/**
 	 * 通知备注
 	 */
-					
+				
 	private String tongzhibeizhu;
+	
+	/**
+	 * 通知状态：待发送、已发送、发送失败
+	 */
+	private String tongzhiZhuangtai;
+	
+	/**
+	 * 发送次数
+	 */
+	private Integer fasonCishu;
+	
+	/**
+	 * 最终发送时间
+	 */
+	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat
+	private Date zuizhongFasonShijian;
+	
+	/**
+	 * 关联预约ID
+	 */
+	private Long yuyueId;
+	
+	/**
+	 * 通知类型：预约成功、就诊提醒、就诊前24小时提醒、就诊前1小时提醒
+	 */
+	private String tongzhiLeixing;
 	
 
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
@@ -216,6 +243,71 @@ public class JiuzhentongzhiEntity<T> implements Serializable {
 	 */
 	public String getTongzhibeizhu() {
 		return tongzhibeizhu;
+	}
+	
+	/**
+	 * 设置：通知状态
+	 */
+	public void setTongzhiZhuangtai(String tongzhiZhuangtai) {
+		this.tongzhiZhuangtai = tongzhiZhuangtai;
+	}
+	/**
+	 * 获取：通知状态
+	 */
+	public String getTongzhiZhuangtai() {
+		return tongzhiZhuangtai;
+	}
+	
+	/**
+	 * 设置：发送次数
+	 */
+	public void setFasonCishu(Integer fasonCishu) {
+		this.fasonCishu = fasonCishu;
+	}
+	/**
+	 * 获取：发送次数
+	 */
+	public Integer getFasonCishu() {
+		return fasonCishu;
+	}
+	
+	/**
+	 * 设置：最终发送时间
+	 */
+	public void setZuizhongFasonShijian(Date zuizhongFasonShijian) {
+		this.zuizhongFasonShijian = zuizhongFasonShijian;
+	}
+	/**
+	 * 获取：最终发送时间
+	 */
+	public Date getZuizhongFasonShijian() {
+		return zuizhongFasonShijian;
+	}
+	
+	/**
+	 * 设置：关联预约ID
+	 */
+	public void setYuyueId(Long yuyueId) {
+		this.yuyueId = yuyueId;
+	}
+	/**
+	 * 获取：关联预约ID
+	 */
+	public Long getYuyueId() {
+		return yuyueId;
+	}
+	
+	/**
+	 * 设置：通知类型
+	 */
+	public void setTongzhiLeixing(String tongzhiLeixing) {
+		this.tongzhiLeixing = tongzhiLeixing;
+	}
+	/**
+	 * 获取：通知类型
+	 */
+	public String getTongzhiLeixing() {
+		return tongzhiLeixing;
 	}
 
 }

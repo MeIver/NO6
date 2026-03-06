@@ -29,6 +29,7 @@ import com.cl.entity.view.YishengyuyueView;
 
 import com.cl.service.YishengyuyueService;
 import com.cl.service.TokenService;
+import com.cl.service.NotificationService;
 import com.cl.utils.PageUtils;
 import com.cl.utils.R;
 import com.cl.utils.MPUtil;
@@ -47,6 +48,9 @@ import com.cl.utils.CommonUtil;
 public class YishengyuyueController {
     @Autowired
     private YishengyuyueService yishengyuyueService;
+
+    @Autowired
+    private NotificationService notificationService;
 
 
 
@@ -179,19 +183,38 @@ public class YishengyuyueController {
 
     /**
      * 审核
+     * 审核通过后立即创建所有后续通知任务
      */
     @RequestMapping("/shBatch")
     @Transactional
     @SysLog("审核医生预约")
     public R update(@RequestBody Long[] ids, @RequestParam String sfsh, @RequestParam String shhf){
+        System.out.println("========== 开始处理预约审核，共 " + ids.length + " 条记录，审核结果: " + sfsh + " ==========");
         List<YishengyuyueEntity> list = new ArrayList<YishengyuyueEntity>();
         for(Long id : ids) {
             YishengyuyueEntity yishengyuyue = yishengyuyueService.selectById(id);
+            System.out.println("处理预约ID: " + id + ", 用户: " + yishengyuyue.getZhanghao());
             yishengyuyue.setSfsh(sfsh);
             yishengyuyue.setShhf(shhf);
             list.add(yishengyuyue);
+
+            // 如果审核通过，立即创建所有后续通知任务
+            if ("是".equals(sfsh)) {
+                System.out.println("预约审核通过，开始创建通知任务...");
+                try {
+                    notificationService.createNotificationTasks(yishengyuyue);
+                    System.out.println("通知任务创建完成！");
+                } catch (Exception e) {
+                    System.err.println("创建通知任务时发生错误: " + e.getMessage());
+                    e.printStackTrace();
+                    // 通知失败不影响审核流程
+                }
+            } else {
+                System.out.println("预约审核未通过，跳过通知任务创建");
+            }
         }
         yishengyuyueService.updateBatchById(list);
+        System.out.println("========== 预约审核处理完成 ==========");
         return R.ok();
     }
 
