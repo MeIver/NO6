@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.IService;
 import com.cl.utils.PageUtils;
 import com.cl.entity.JiuzhentongzhiEntity;
+import com.cl.entity.YishengyuyueEntity;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Param;
@@ -27,6 +28,13 @@ public interface JiuzhentongzhiService extends IService<JiuzhentongzhiEntity> {
    	
    	PageUtils queryPage(Map<String, Object> params,Wrapper<JiuzhentongzhiEntity> wrapper);
    	
+   	void createNotifications(YishengyuyueEntity yuyue);
+   	
+   	boolean sendNotification(JiuzhentongzhiEntity tongzhi);
+   	
+   	void retryFailedNotifications();
+   	
+   	void manualRetry(Long id);
    
 }
 

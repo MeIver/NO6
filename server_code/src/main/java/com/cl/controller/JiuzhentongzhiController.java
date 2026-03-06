@@ -191,6 +191,26 @@ public class JiuzhentongzhiController {
         return R.ok();
     }
     
+    /**
+     * 手动重试发送通知
+     */
+    @RequestMapping("/retry/{id}")
+    @SysLog("手动重试发送通知")
+    public R retry(@PathVariable("id") Long id){
+        jiuzhentongzhiService.manualRetry(id);
+        return R.ok("重试成功");
+    }
+    
+    /**
+     * 批量重试发送失败通知
+     */
+    @RequestMapping("/retryAll")
+    @SysLog("批量重试发送失败通知")
+    public R retryAll(){
+        jiuzhentongzhiService.retryFailedNotifications();
+        return R.ok("批量重试成功");
+    }
+    
 	
 
 

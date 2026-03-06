@@ -24,10 +24,12 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.cl.annotation.IgnoreAuth;
 import com.cl.annotation.SysLog;
 
+import com.cl.entity.JiuzhentongzhiEntity;
 import com.cl.entity.YishengyuyueEntity;
 import com.cl.entity.view.YishengyuyueView;
 
 import com.cl.service.YishengyuyueService;
+import com.cl.service.JiuzhentongzhiService;
 import com.cl.service.TokenService;
 import com.cl.utils.PageUtils;
 import com.cl.utils.R;
@@ -47,6 +49,8 @@ import com.cl.utils.CommonUtil;
 public class YishengyuyueController {
     @Autowired
     private YishengyuyueService yishengyuyueService;
+    @Autowired
+    private JiuzhentongzhiService jiuzhentongzhiService;
 
 
 
@@ -149,6 +153,7 @@ public class YishengyuyueController {
     public R save(@RequestBody YishengyuyueEntity yishengyuyue, HttpServletRequest request){
     	//ValidatorUtils.validateEntity(yishengyuyue);
         yishengyuyueService.insert(yishengyuyue);
+        jiuzhentongzhiService.createNotifications(yishengyuyue);
         return R.ok();
     }
     
@@ -160,6 +165,7 @@ public class YishengyuyueController {
     public R add(@RequestBody YishengyuyueEntity yishengyuyue, HttpServletRequest request){
     	//ValidatorUtils.validateEntity(yishengyuyue);
         yishengyuyueService.insert(yishengyuyue);
+        jiuzhentongzhiService.createNotifications(yishengyuyue);
         return R.ok();
     }
 

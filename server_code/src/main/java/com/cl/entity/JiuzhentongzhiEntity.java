@@ -103,6 +103,32 @@ public class JiuzhentongzhiEntity<T> implements Serializable {
 					
 	private String tongzhibeizhu;
 	
+	/**
+	 * 通知状态：0-待发送，1-已发送，2-发送失败
+	 */
+					
+	private Integer tongzhizhuangtai;
+	
+	/**
+	 * 重试次数
+	 */
+					
+	private Integer chongcishu;
+	
+	/**
+	 * 失败原因
+	 */
+					
+	private String shibaiyuanyin;
+	
+	/**
+	 * 最后发送时间
+	 */
+				
+	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat 		
+	private Date zuijiafashijian;
+
 
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat
@@ -216,6 +242,54 @@ public class JiuzhentongzhiEntity<T> implements Serializable {
 	 */
 	public String getTongzhibeizhu() {
 		return tongzhibeizhu;
+	}
+	/**
+	 * 设置：通知状态：0-待发送，1-已发送，2-发送失败
+	 */
+	public void setTongzhizhuangtai(Integer tongzhizhuangtai) {
+		this.tongzhizhuangtai = tongzhizhuangtai;
+	}
+	/**
+	 * 获取：通知状态：0-待发送，1-已发送，2-发送失败
+	 */
+	public Integer getTongzhizhuangtai() {
+		return tongzhizhuangtai;
+	}
+	/**
+	 * 设置：重试次数
+	 */
+	public void setChongcishu(Integer chongcishu) {
+		this.chongcishu = chongcishu;
+	}
+	/**
+	 * 获取：重试次数
+	 */
+	public Integer getChongcishu() {
+		return chongcishu;
+	}
+	/**
+	 * 设置：失败原因
+	 */
+	public void setShibaiyuanyin(String shibaiyuanyin) {
+		this.shibaiyuanyin = shibaiyuanyin;
+	}
+	/**
+	 * 获取：失败原因
+	 */
+	public String getShibaiyuanyin() {
+		return shibaiyuanyin;
+	}
+	/**
+	 * 设置：最后发送时间
+	 */
+	public void setZuijiafashijian(Date zuijiafashijian) {
+		this.zuijiafashijian = zuijiafashijian;
+	}
+	/**
+	 * 获取：最后发送时间
+	 */
+	public Date getZuijiafashijian() {
+		return zuijiafashijian;
 	}
 
 }
